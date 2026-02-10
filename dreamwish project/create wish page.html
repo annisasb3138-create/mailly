@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mailly ✨ Create Message</title>
+  <link rel="stylesheet" href="style create.css">
+</head>
+
+<body>
+
+  <!-- PIXEL BACKGROUND -->
+  <div class="pixel-bg">
+    <span>♥</span><span>★</span><span>☺</span><span>✦</span><span>♥</span>
+    <span>★</span><span>✧</span><span>♡</span><span>✷</span><span>☺</span>
+  </div>
+
+  <!-- POSTER -->
+  <div class="poster">
+    <div class="poster-inner">
+      <h1>Mailly</h1>
+      <p class="subtitle">Write your messages and add a photo ✨</p>
+
+      <form id="messageForm">
+        <label for="to">To:</label>
+        <input type="text" id="to" required>
+
+        <label for="message">Your Message:</label>
+        <textarea id="message" required></textarea>
+
+        <label for="photo">Upload a photo (optional):</label>
+        <input type="file" id="photo" accept="image/*">
+
+        <button type="submit">Send Message</button>
+      </form>
+
+      <div class="share-link" id="link" style="margin-top:1rem;"></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('messageForm');
+    const linkDiv = document.getElementById('link');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const to = document.getElementById('to').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const photoInput = document.getElementById('photo');
+      const file = photoInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          saveAndGenerateLink(to, message, reader.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        saveAndGenerateLink(to, message, null);
+      }
+    });
+
+    function saveAndGenerateLink(to, message, photoData) {
+      const id = Date.now(); // key unik
+      const dataObj = { to, message, photo: photoData };
+      localStorage.setItem(id, JSON.stringify(dataObj));
+
+      const url = `${location.origin}/open.html?id=${id}`;
+
+      linkDiv.innerHTML = `
+        <p>Share this link with your friend:</p>
+        <a href="${url}" target="_blank">${url}</a>
+      `;
+    }
+  </script>
+</body>
+
+</html>

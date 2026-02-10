@@ -1,0 +1,269 @@
+/* =====================
+   RESET & BASE
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1f6fff, #0a4bff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* =====================
+   PIXEL BACKGROUND ORNAMENT
+===================== */
+.pixel-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pixel-bg span {
+  position: absolute;
+  font-size: 14px;
+  color: #ffffff;
+  text-shadow:
+    -1px -1px 0 #0a4bff,
+    1px -1px 0 #0a4bff,
+    -1px 1px 0 #0a4bff,
+    1px 1px 0 #0a4bff;
+  animation: float 4s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+.pixel-bg span:nth-child(1) {
+  top: 8%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.pixel-bg span:nth-child(2) {
+  top: 15%;
+  left: 70%;
+  animation-delay: 1s;
+}
+
+.pixel-bg span:nth-child(3) {
+  top: 30%;
+  left: 20%;
+  animation-delay: 2s;
+}
+
+.pixel-bg span:nth-child(4) {
+  top: 40%;
+  left: 85%;
+  animation-delay: 0.5s;
+}
+
+.pixel-bg span:nth-child(5) {
+  top: 55%;
+  left: 50%;
+  animation-delay: 1.5s;
+}
+
+.pixel-bg span:nth-child(6) {
+  top: 65%;
+  left: 15%;
+  animation-delay: 2.5s;
+}
+
+.pixel-bg span:nth-child(7) {
+  top: 75%;
+  left: 75%;
+  animation-delay: 1s;
+}
+
+.pixel-bg span:nth-child(8) {
+  top: 85%;
+  left: 35%;
+  animation-delay: 3s;
+}
+
+.pixel-bg span:nth-child(9) {
+  top: 22%;
+  left: 45%;
+  animation-delay: 0.8s;
+}
+
+.pixel-bg span:nth-child(10) {
+  top: 60%;
+  left: 90%;
+  animation-delay: 2.2s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(2px, -6px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* =====================
+   POSTER / CARD
+===================== */
+.poster {
+  position: relative;
+  z-index: 5;
+  width: 90%;
+  max-width: 520px;
+  background: #fff4e6;
+  padding: 28px;
+  border: 4px solid #0a4bff;
+  box-shadow: 10px 10px 0 #ff7a00;
+  text-align: center;
+  animation: poster-float 3.5s ease-in-out infinite;
+}
+
+@keyframes poster-float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.poster-inner {
+  border: 2px dashed #0a4bff;
+  padding: 24px;
+}
+
+/* =====================
+   TEXT
+===================== */
+.poster h1 {
+  font-size: 26px;
+  color: #0a4bff;
+  margin-bottom: 6px;
+}
+
+.poster .subtitle {
+  font-size: 13px;
+  color: #ff7a00;
+  margin-bottom: 18px;
+}
+
+.poster h2 {
+  font-size: 18px;
+  color: #0a4bff;
+  margin-bottom: 6px;
+}
+
+.poster p {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+/* =====================
+   AMPLoP
+===================== */
+#envelope {
+  width: 160px;
+  height: 100px;
+  background: #0a4bff;
+  margin: 0 auto 20px auto;
+  position: relative;
+  border: 2px solid #fff;
+  box-shadow: 4px 4px 0 #ff7a00;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#envelope::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 50px solid #fff4e6;
+}
+
+#envelope:hover {
+  transform: translateY(-3px);
+}
+
+#envelope.open {
+  transform: rotateX(180deg);
+  transition: transform 0.5s;
+}
+
+/* =====================
+   MESSAGE CONTAINER
+===================== */
+#messageContainer {
+  display: none;
+}
+
+#messageContainer img {
+  max-width: 100%;
+  margin-top: 12px;
+  border: 2px solid #0a4bff;
+}
+
+/* =====================
+   BUTTON CREATE NEW
+===================== */
+#createNew {
+  margin-top: 20px;
+  padding: 10px 28px;
+  font-family: inherit;
+  font-size: 14px;
+  background: #0a4bff;
+  color: #fff;
+  border: 2px solid #0a4bff;
+  box-shadow: 4px 4px 0 #ff7a00;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+#createNew:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #ff7a00;
+}
+
+/* =====================
+   DESKTOP MODE
+===================== */
+@media (min-width: 1024px) {
+  .poster {
+    max-width: 640px;
+    padding: 36px;
+  }
+
+  .poster h1 {
+    font-size: 32px;
+  }
+
+  .poster p,
+  .poster .subtitle {
+    font-size: 15px;
+  }
+
+  #createNew {
+    font-size: 16px;
+    padding: 12px 34px;
+  }
+}

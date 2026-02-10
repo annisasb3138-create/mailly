@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mailly ✨ Open Message</title>
+  <link rel="stylesheet" href="open.css">
+</head>
+
+<body>
+
+  <!-- PIXEL BACKGROUND -->
+  <div class="pixel-bg">
+    <span>♥</span><span>★</span><span>☺</span><span>✦</span><span>♥</span>
+    <span>★</span><span>✧</span><span>♡</span><span>✷</span><span>☺</span>
+  </div>
+
+  <div class="poster">
+    <div class="poster-inner">
+      <h1>Mailly</h1>
+      <p class="subtitle">Click the envelope to open your message ✨</p>
+
+      <!-- Amplop -->
+      <div id="envelope"></div>
+
+      <!-- Container pesan -->
+      <div id="messageContainer">
+        <h2 id="to"></h2>
+        <p id="messageText"></p>
+        <img id="messagePhoto" src="" alt="Attached photo" style="display:none;">
+      </div>
+
+      <button id="createNew">Create Your Own Message Here</button>
+    </div>
+  </div>
+
+  <script>
+    // ambil id dari URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const envelope = document.getElementById('envelope');
+    const messageContainer = document.getElementById('messageContainer');
+    const toEl = document.getElementById('to');
+    const messageEl = document.getElementById('messageText');
+    const photoEl = document.getElementById('messagePhoto');
+    const createBtn = document.getElementById('createNew');
+
+    let messageData = null;
+
+    if (id) {
+      const stored = localStorage.getItem(id);
+      if (stored) {
+        messageData = JSON.parse(stored);
+      } else {
+        alert("Message not found or expired!");
+      }
+    }
+
+    envelope.addEventListener('click', () => {
+      if (!messageData) return;
+      envelope.classList.add('open');
+      messageContainer.style.display = 'block';
+      toEl.textContent = "To: " + messageData.to;
+      messageEl.textContent = messageData.message;
+      if (messageData.photo) {
+        photoEl.src = messageData.photo;
+        photoEl.style.display = 'block';
+      }
+    });
+
+    createBtn.addEventListener('click', () => {
+      window.location.href = 'create.html';
+    });
+  </script>
+</body>
+
+</html>
